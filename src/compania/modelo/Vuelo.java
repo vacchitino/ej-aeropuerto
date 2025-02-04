@@ -1,4 +1,4 @@
-package compania;
+package compania.modelo;
 
 public abstract class Vuelo{
    private int numeroVuelo;
@@ -35,15 +35,23 @@ public int getAsientosOcup() {
     return asientosOcup;
 }
 protected void setAsientosOcup(int asientosOcup) {
-    if(asientosOcup <= maxPasajeros) {
+    if(asientosOcup < 0) {
+        System.out.println("¡Error! No se pueden asignar asientos negativos.");
+    }else if (asientosOcup > maxPasajeros) {
+        System.out.println("¡Error! No se puede asignar una cantidad de asientos que supere la capacidad máxima del avión.");
+    }else {
         this.asientosOcup = asientosOcup;
+    }   
+}
+public void verificarDisp() {
+    if(getMaxPasajeros() == getAsientosOcup()) {
+        System.out.println("No hay asientos disponibles en el vuelo");
     }
     else {
-        System.out.println("¡Error! No se puede superar la capacidad maxima de pasajeros. ");
+        System.out.println("Quedan " + (getMaxPasajeros() - getAsientosOcup()) + " asientos disponibles");
     }
-        
 }
+
 public abstract String obtenerTipoVuelo();
 
-   
 }
